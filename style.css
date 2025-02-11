@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "roboto";
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+}
+
+header {
+    background-color: blue;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calco {
+    min-width:300px;
+    border: solid 5px blue;
+    padding: 20px;
+}
+
+.ecran {
+    background-color: green;
+    padding: 30px 20px;
+    margin-bottom: 20px;
+    border: solid 5px black;
+}
+
+.clavier {
+    display: grid;
+    row-gap: 20px;
+    column-gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 10px;
+    
+
+}
+
+.bouton {
+    background-color: green;
+    color: white;
+    aspect-ratio: 0.9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: large;
+    font-weight: bold; 
+    border-radius: 4px;  
+}
+
+.bouton:hover {
+    opacity: 0.5;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+.supp {
+    background-color: red;
+    width: 100%;
+    padding: 10px;
+    font-size: large;
+    color: white;
+}
+
+.supp:hover {
+    opacity: 0.5;
+    transition: 0.1s;
+    cursor: pointer;
+}
