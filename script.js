@@ -66,6 +66,20 @@ function calculer() {
     }
 }
 
+function retourArriere() {
+    // Si un résultat vient d'être affiché, le retour arrière efface tout
+    if (resultatAffiche) {
+        effacer();
+        return;
+    }
+
+    // On retire le tout dernier caractère de la chaîne
+    calcul = calcul.slice(0, -1);
+
+    // On met à jour l'écran (si calcul est vide, afficher "0")
+    afficher(calcul);
+}
+
 function effacer() {
     calcul = "";
     resultatAffiche = false;
@@ -78,6 +92,8 @@ boutons.forEach((bouton) => {
 
         if (valeur === "=") {
             calculer();
+        } else if (valeur === "⌫") {
+            retourArriere();    
         } else {
             ajouterValeur(valeur);
         }
