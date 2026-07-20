@@ -1,6 +1,5 @@
 const ecran = document.querySelector("#ecran");
 const boutons = document.querySelectorAll(".bouton");
-const boutonClear = document.querySelector(".supp");
 
 let calcul = "";
 let resultatAffiche = false;
@@ -67,16 +66,12 @@ function calculer() {
 }
 
 function retourArriere() {
-    // Si un résultat vient d'être affiché, le retour arrière efface tout
     if (resultatAffiche) {
         effacer();
         return;
     }
 
-    // On retire le tout dernier caractère de la chaîne
     calcul = calcul.slice(0, -1);
-
-    // On met à jour l'écran (si calcul est vide, afficher "0")
     afficher(calcul);
 }
 
@@ -86,18 +81,38 @@ function effacer() {
     afficher("0");
 }
 
+function gererAction(valeur) {
+    if (valeur === "=") {
+        calculer();
+    } else if (valeur === "DEL") {
+        retourArriere();
+    } else if (valeur === "AC") {
+        effacer();
+    } else {
+        ajouterValeur(valeur);
+    }
+}
+
 boutons.forEach((bouton) => {
     bouton.addEventListener("click", () => {
-        const valeur = bouton.textContent.trim();
-
-        if (valeur === "=") {
-            calculer();
-        } else if (valeur === "⌫") {
-            retourArriere();    
-        } else {
-            ajouterValeur(valeur);
-        }
+        gererAction(bouton.dataset.value);
     });
 });
 
-boutonClear.addEventListener("click", effacer);
+document.addEventListener("keydown", (event) => {
+    const touche = event.key;
+
+    if (/^[0-9.]$/.test(touche) || estOperateur(touche)) {
+        gererAction(touche);
+        return;
+    }
+
+    if (touche === "Enter" || touche === "=") {
+        event.preventDefault();
+        gererAction("=");
+    } else if (touche === "Backspace") {
+        gererAction("DEL");
+    } else if (touche === "Escape") {
+        gererAction("AC");
+    }
+});
